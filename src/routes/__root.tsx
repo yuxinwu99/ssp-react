@@ -18,11 +18,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <AppSidebar />
       <div className="flex w-full h-screen flex-col">
         <TopNavBar />
-        <div className="flex flex-col overflow-hidden">
+        <div className="flex flex-col grow overflow-hidden ">
           <Outlet />
         </div>
-        {/* <TanStackRouterDevtools />
-        <TanStackQueryLayout /> */}
+        <TanStackRouterDevtools />
+        <TanStackQueryLayout />
       </div>
     </SidebarProvider>
   ),
