@@ -10,10 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SecretsRouteImport } from './routes/secrets'
-import { Route as OrrRouteImport } from './routes/orr'
 import { Route as DeploymentsRouteImport } from './routes/deployments'
 import { Route as ComplianceRouteImport } from './routes/compliance'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OrrIndexRouteImport } from './routes/orr/index'
+import { Route as OrrFormRouteImport } from './routes/orr/form'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
 import { Route as DemoTableRouteImport } from './routes/demo.table'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo.form.simple'
@@ -22,11 +23,6 @@ import { Route as DemoFormAddressRouteImport } from './routes/demo.form.address'
 const SecretsRoute = SecretsRouteImport.update({
   id: '/secrets',
   path: '/secrets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OrrRoute = OrrRouteImport.update({
-  id: '/orr',
-  path: '/orr',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeploymentsRoute = DeploymentsRouteImport.update({
@@ -42,6 +38,16 @@ const ComplianceRoute = ComplianceRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrrIndexRoute = OrrIndexRouteImport.update({
+  id: '/orr/',
+  path: '/orr/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrrFormRoute = OrrFormRouteImport.update({
+  id: '/orr/form',
+  path: '/orr/form',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
@@ -69,10 +75,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compliance': typeof ComplianceRoute
   '/deployments': typeof DeploymentsRoute
-  '/orr': typeof OrrRoute
   '/secrets': typeof SecretsRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/orr/form': typeof OrrFormRoute
+  '/orr': typeof OrrIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
@@ -80,10 +87,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compliance': typeof ComplianceRoute
   '/deployments': typeof DeploymentsRoute
-  '/orr': typeof OrrRoute
   '/secrets': typeof SecretsRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/orr/form': typeof OrrFormRoute
+  '/orr': typeof OrrIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
@@ -92,10 +100,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/compliance': typeof ComplianceRoute
   '/deployments': typeof DeploymentsRoute
-  '/orr': typeof OrrRoute
   '/secrets': typeof SecretsRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/orr/form': typeof OrrFormRoute
+  '/orr/': typeof OrrIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
@@ -105,10 +114,11 @@ export interface FileRouteTypes {
     | '/'
     | '/compliance'
     | '/deployments'
-    | '/orr'
     | '/secrets'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/orr/form'
+    | '/orr'
     | '/demo/form/address'
     | '/demo/form/simple'
   fileRoutesByTo: FileRoutesByTo
@@ -116,10 +126,11 @@ export interface FileRouteTypes {
     | '/'
     | '/compliance'
     | '/deployments'
-    | '/orr'
     | '/secrets'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/orr/form'
+    | '/orr'
     | '/demo/form/address'
     | '/demo/form/simple'
   id:
@@ -127,10 +138,11 @@ export interface FileRouteTypes {
     | '/'
     | '/compliance'
     | '/deployments'
-    | '/orr'
     | '/secrets'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/orr/form'
+    | '/orr/'
     | '/demo/form/address'
     | '/demo/form/simple'
   fileRoutesById: FileRoutesById
@@ -139,10 +151,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComplianceRoute: typeof ComplianceRoute
   DeploymentsRoute: typeof DeploymentsRoute
-  OrrRoute: typeof OrrRoute
   SecretsRoute: typeof SecretsRoute
   DemoTableRoute: typeof DemoTableRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  OrrFormRoute: typeof OrrFormRoute
+  OrrIndexRoute: typeof OrrIndexRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
 }
@@ -154,13 +167,6 @@ declare module '@tanstack/react-router' {
       path: '/secrets'
       fullPath: '/secrets'
       preLoaderRoute: typeof SecretsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/orr': {
-      id: '/orr'
-      path: '/orr'
-      fullPath: '/orr'
-      preLoaderRoute: typeof OrrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/deployments': {
@@ -182,6 +188,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orr/': {
+      id: '/orr/'
+      path: '/orr'
+      fullPath: '/orr'
+      preLoaderRoute: typeof OrrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orr/form': {
+      id: '/orr/form'
+      path: '/orr/form'
+      fullPath: '/orr/form'
+      preLoaderRoute: typeof OrrFormRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/tanstack-query': {
@@ -219,10 +239,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComplianceRoute: ComplianceRoute,
   DeploymentsRoute: DeploymentsRoute,
-  OrrRoute: OrrRoute,
   SecretsRoute: SecretsRoute,
   DemoTableRoute: DemoTableRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  OrrFormRoute: OrrFormRoute,
+  OrrIndexRoute: OrrIndexRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
 }

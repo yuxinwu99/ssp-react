@@ -1,14 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-export const Route = createFileRoute("/orr")({
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+export const Route = createFileRoute("/orr/")({
   component: RouteComponent,
 });
 
@@ -25,7 +17,13 @@ type ORR = {
 
 function RouteComponent() {
   return (
-    <div className="p-4">
+    <div className="p-4 flex flex-col gap-4">
+      <Link
+        to="/orr/form"
+        className="text-blue-500 hover:underline mb-4 bg-red-300 p-3 rounded-md w-fit"
+      >
+        create new ORR
+      </Link>
       <Table>
         <TableHeader>
           <TableRow>
